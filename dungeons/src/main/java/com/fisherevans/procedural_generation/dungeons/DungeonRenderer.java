@@ -22,9 +22,12 @@ public class DungeonRenderer {
 
 	public static void main(String[] args) {
 		//*
-		for(File file:new File("gen").listFiles()) {
-			if(file.getName().startsWith(FILE_PREFIX)) {
-				file.delete();
+		File[] listFiles = new File("gen").listFiles();
+		if (listFiles != null) {
+			for(File file:listFiles) {
+				if(file.getName().startsWith(FILE_PREFIX)) {
+					file.delete();
+				}
 			}
 		}
 		/**/

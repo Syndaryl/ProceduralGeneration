@@ -13,8 +13,11 @@ import javax.imageio.ImageIO;
 public class CaveRenderer {
 	public static void main(String[] args) {
 		//*
-		for(File file:new File("caves").listFiles()) {
-			file.delete();
+		File[] listFiles = new File("gen").listFiles();
+		if (listFiles != null) {
+			for(File file:listFiles) {
+				file.delete();
+			}
 		}
 		/**/
 		for(int count = 0;count < 1;count++) {

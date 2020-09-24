@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -145,7 +147,20 @@ public class OrganicCaves {
         for (int y = 0; y < _height; y++)
             for (int x = 0; x < _width; x++)
                 img.setRGB(x, y, new Color(_map[y][x], _map[y][x], _map[y][x]).getRGB());
-        ImageIO.write(img, "png", new File("gen/cave_" + filename));
+        File output_file = null;
+    	Path currentRelativePath = Paths.get("..");
+    	String s = currentRelativePath.toAbsolutePath().toString();
+    	System.out.println("Current relative path is: " + s);
+        String pathname = Paths.get("gen/cave_" + filename).toAbsolutePath().toString();
+    	System.out.println("File target: " + pathname);
+        try {
+			output_file = new File(pathname);
+			ImageIO.write(img, "png", output_file);
+        }
+        catch (java.io.FileNotFoundException e) {
+        	System.out.println("The system cannot find the path specified: " + pathname);
+        	throw e;
+        }
     }
 
     private static final float clamp(float x) {
